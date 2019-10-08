@@ -1,0 +1,13 @@
+{
+    "coc.preferences.useQuickfixForLocations": true,
+    "languageserver": {
+        "omnisharp": {
+            //"command": "/Users/demelev/Downloads/omnisharp-osx/run",
+            "command": "mono",
+            "args": ["/Users/demelev/projects/csharp/omnisharp-roslyn/bin/Debug/OmniSharp.Stdio.Driver/net472/OmniSharp.exe","-lsp"],
+            //"trace.server": "verbose",
+            "filetypes": ["cs"],
+            "rootPatterns": [".sln"]
+        }
+    }
+}

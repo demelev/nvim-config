@@ -12,24 +12,24 @@ endsnippet
 
 # == Debug  =================
 
-snippet dl "Bully.Log( ... );"
-Bully.Log("${1:Message}");
+snippet dl "Debug.Log( ... );"
+Debug.Log("[`!v expand("%:t:r")`] ${1:Message}");
 endsnippet
 
-snippet dlg "Bully.Log( ... , gameObject);" b
-Bully.Log("${1:Message}", gameObject);
+snippet dlg "Debug.Log( ... , gameObject);" b
+Debug.Log("[`!v expand("%:t:r")`] ${1:Message}", gameObject);
 endsnippet
 
-snippet dlf "Bully.LogFormat( ... );"
-Bully.LogFormat("${1:Message}", ${2});
+snippet dlf "Debug.LogFormat( ... );"
+Debug.LogFormat("[`!v expand("%:t:r")`] ${1:Message}", ${2});
 endsnippet
 
-snippet dle "Bully.LogError( ... );"
-Bully.LogError("${1:Message}");
+snippet dle "Debug.LogError( ... );"
+Debug.LogError("[`!v expand("%:t:r")`] ${1:Message}");
 endsnippet
 
-snippet dlw "Bully.LogWarning( ... );"
-Bully.LogWarning("${1:Message}");
+snippet dlw "Debug.LogWarning( ... );"
+Debug.LogWarning("[`!v expand("%:t:r")`] ${1:Message}");
 endsnippet
 
 snippet db "Debug.Break();"
@@ -166,12 +166,50 @@ snippet sc "StartCoroutine(Coroutine());"
 StartCoroutine(${1:Coroutine}());
 endsnippet
 
+snippet "wait (\d+\.\d+f?)" "yield return new WaitForSeconds(...);" r
+yield return new WaitForSeconds(`!p snip.rv = match.group(1)`);
+${0}
+endsnippet
+
 snippet wait "yield return new WaitForSeconds(...);"
 yield return new WaitForSeconds(${1:time});
 endsnippet
 
+#snippet "waitp (\w(\w+|.|\(.*\)))" "yield return promise.Wait()" r
+snippet "waitp (.*)" "yield return promise.Wait()" r
+yield return `!p snip.rv = match.group(1)`.Wait();
+endsnippet
+
+snippet yr "yield return"
+yield return
+endsnippet
+
 snippet yn "yield return null;"
 yield return null;
+endsnippet
+
+snippet ya "yield return audioController.VO.WaitPlayVO();"
+yield return audioController.VO.WaitPlayVO("${0}");
+endsnippet
+
+snippet yuc "yield return new WaitUntil"
+yield return new WaitUntil( () => ${0} );
+endsnippet
+
+snippet "eepm (\w+)" "Enable position marker" r
+environmentController.EnablePosMarker("`!p snip.rv = match.group(1)`");
+endsnippet
+
+snippet "egpm (\w+)" "Get position marker" r
+var ${1:`!p snip.rv = match.group(1).lower()`} = environmentController.GetXf("`!p snip.rv = match.group(1)`");
+endsnippet
+
+snippet "uie (\w+)" "uiController[Button.Name] = true;" r
+uiController[Button.`!p snip.rv = match.group(1)`] = true;
+endsnippet
+
+snippet "uid (\w+)" "uiController[Button.Name] = true;" r
+uiController[Button.`!p snip.rv = match.group(1)`] = false;
 endsnippet
 
 snippet but "if (GUILayout.Button(...)) { ... } "
@@ -464,6 +502,7 @@ snippet hhh
 
 endsnippet
 
+
 snippet cm
 [ContextMenu("${0}")]
 endsnippet
@@ -471,13 +510,13 @@ endsnippet
 # Big fat template
 #`!v ExpandSnippet("hhh")` TODO: find a way for expandiing snippet from snippet
 snippet temp "public class FileName : MonoBehaviour"
-hhh${1}
 
-using UnityEngine;
-using System.Collections;
+using UnityEngine;${50:using BullyFramework;}${51:using System.Collections;}
 
-public class `!p snip.rv = snip.basename or "Untitled"` : MonoBehaviour
+namespace ${1:Namespace}
 {
+	public class `!p snip.rv = snip.basename or "Untitled"` : MonoBehaviour
+	{
 
 
 #region Serializable data
@@ -496,17 +535,10 @@ public class `!p snip.rv = snip.basename or "Untitled"` : MonoBehaviour
 
 
 #region MonoBehaviour methods
-
-    void Start ()
-    {
-    }
-
-    void Update ()
-    {
-    }
-
 #endregion
 
+
+	}
 }
 endsnippet
 
@@ -518,3 +550,75 @@ if ($1 != null)
 }
 endsnippet
 
+snippet ife
+#if UNITY_EDITOR
+	${0:${VISUAL:code}}
+#endif 
+endsnippet
+
+snippet sotemp
+
+using UnityEngine;${49:using UnityEditor;}${50:using System;} ${51:using BullyFramework;}${52:using System.Collections;}
+
+namespace ${1:NameSpace}
+{
+	[CreateAssetMenuAttribute(fileName = "$2", menuName = "$1/DataModel/$2")]
+	public class ${2:`!v expand("%:t:r")`}: ScriptableObject
+	{
+		${0}
+	}
+}
+endsnippet
+
+
+snippet "iterc (\w+)" r
+int len =  `!p snip.rv = match.group(1)`.Count;
+for (int ${1:i} = 0; $1 < len; ++$1 )
+{
+	var it = `!p snip.rv = match.group(1)`[$1];
+	${0}
+}
+endsnippet
+
+snippet "iter (\w+)" r
+int len =  `!p snip.rv = match.group(1)`.Length;
+for (int ${1:i} = 0; $1 < len; ++$1 )
+{
+	var it = `!p snip.rv = match.group(1)`[$1];
+	${0}
+}
+endsnippet
+
+snippet "ann (\w+)" r
+Assert.IsNotNull(`!p snip.rv = match.group(1)`, " `!p snip.rv = match.group(1)` is null at " + name );
+endsnippet
+
+
+snippet hr
+[Header("${0:Description goes here}")]
+endsnippet
+
+snippet sp
+[Space]
+endsnippet
+
+snippet tt
+[Tooltip("${0:Description goes here}")]
+endsnippet
+
+
+snippet lazyp
+private ${2:Type} ${1:fieldname}_f;
+private $2 $1
+{
+	get
+	{
+		if($1_f == null)
+		{
+			$1_f = new $2 ();
+			${0}
+		}
+		return $1_f;
+	}
+}
+endsnippet
