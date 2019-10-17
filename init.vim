@@ -96,14 +96,15 @@ Plug 'airblade/vim-rooter'
 
 " Tools
 Plug 'vim-scripts/open-browser.vim'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'posva/vim-vue'
 Plug 'joshdick/onedark.vim'
 Plug 'wsdjeg/FlyGrep.vim'
+Plug 'puremourning/vimspector'
 
 Plug 'timonv/vim-cargo'
 
@@ -701,28 +702,28 @@ let g:UltiSnipsSnippetDirectories = ['Ultisnips']
 " }}} UltiSnips
 
 " {{{ Airline
-"let g:airline_theme = 'tomorrow'
-"let g:airline_detected_modified = 1
-"let g:airline_powerline_fonts = 1
-"let g:airline_detect_iminsert = 0
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-"let g:airline#extensions#hunks#non_zero_only = 1
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#branch#enabled = 1
-"let g:airline#extensions#whitespace#enabled = 1
-"let g:airline#extensions#whitespace#mixed_indent_algo = 1
-"let g:airline#extensions#whitespace#show_message = 1
-"let g:airline#extensions#whitespace#trailing_format = 's:[%s]'
-"let g:airline#extensions#whitespace#mixed_indent_format = 'i:[%s]'
-"let g:airline#extensions#tagbar#flags = 'f'
-"let g:airline_mode_map = {
-"      \ '__' : '-',
-"      \ 'n'  : 'N',
-"      \ 'i'  : 'I',
-"      \ 'R'  : 'R',
-"      \ 'v'  : 'V',
-"      \ 'V'  : 'B'
-"      \ }
+" let g:airline_theme = 'tomorrow'
+let g:airline_detected_modified = 1
+let g:airline_powerline_fonts = 1
+let g:airline_detect_iminsert = 0
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#whitespace#show_message = 1
+let g:airline#extensions#whitespace#trailing_format = 's:[%s]'
+let g:airline#extensions#whitespace#mixed_indent_format = 'i:[%s]'
+let g:airline#extensions#tagbar#flags = 'f'
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'v'  : 'V',
+      \ 'V'  : 'B'
+      \ }
 " }}}
 
 " {{{ Indent guides
